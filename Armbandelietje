@@ -1,2 +1,172 @@
-git branch -M main
-git push -u origin main
+import Link from 'next/link';
+
+export default function Webshop() {
+  const [cart, setCart] = useState([]);
+
+  const addToCart = (product) => {
+    setCart([...cart, product]);
+  };
+
+  const removeFromCart = (index) => {
+    setCart(cart.filter((_, i) => i !== index));
+  };
+
+  const getTotalPrice = () => {
+    return cart.reduce((total, item) => total + item.price, 0).toFixed(2);
+  };
+
+  return (
+    <div className="p-8">
+      {/* Navigatiebalk */}
+      <nav className="bg-blue-500 p-4 rounded-lg shadow-md mb-6">
+        <ul className="flex justify-center space-x-8">
+          <li><Link href="/" className="text-white font-bold">Home</Link></li>
+          <li><Link href="#products" className="text-white font-bold">Producten</Link></li>
+          <li><Link href="#cart" className="text-white font-bold">Winkel
+          <li><Link href="#about" className="text-white font-bold">Over Ons</Link></li>
+          <div id="about" className="mt-12 p-6 bg-white shadow-lg rounded-lg">
+  <h2 className="text-2xl font-semibold mb-4">Over Ons</h2>
+  <p className="text-gray-600">
+    Welkom bij Armbandelietje! Wij maken handgemaakte juwelen met liefde en passie. Elk product wordt zorgvuldig ontworpen en gemaakt met de mooiste kralen en materialen. Of je nu op zoek bent naar een bijzondere armband voor jezelf of een uniek cadeau voor een ander, bij Armbandelietje vind je altijd iets moois.
+  </p>
+  <p className="text-gray-600 mt-4">
+    Onze missie is om mensen te voorzien van betaalbare en stijlvolle juwelen die een persoonlijk tintje aan hun stijl geven. Wij geloven in vakmanschap en de kracht van handgemaakte producten. Elk juweel wordt met zorg gemaakt, zodat jij het met trots kunt dragen.
+  </p>
+</div>
+const products = [
+  {
+    id: 1,
+    name: "Armband Blauw",
+    price: 15,
+    image: "/images/armband-blauw.jpg",
+    description: "Een mooie handgemaakte armband in blauw, perfect voor elke gelegenheid.",
+    category: "Armbanden",
+  },
+  {
+    id: 2,
+    name: "Armband Roze",
+    price: 12,
+    image: "/images/armband-roze.jpg",
+    description: "Zachte, vrouwelijke kleur voor een elegante uitstraling.",
+    category: "Armbanden",
+  },
+  {
+    id: 3,
+    name: "Armband Groen",
+    price: 18,
+    image: "/images/armband-groen.jpg",
+    description: "Een frisse groene armband die ideaal is voor de lente.",
+    category: "Armbanden",
+  },
+  {
+    id: 4,
+    name: "Oorbellen Goud",
+    price: 20,
+    image: "/images/oorbellen-goud.jpg",
+    description: "Stijlvolle, gouden oorbellen voor een luxe uitstraling.",
+    category: "Oorbellen",
+  },
+  {
+    id: 5,
+    name: "Ketting Zilver",
+    price: 25,
+    image: "/images/ketting-zilver.jpg",
+    description: "Prachtige zilveren ketting voor een verfijnde look.",
+    category: "Ketting",
+  },
+];
+
+export default function Webshop() {
+  const [cart, setCart] = useState([]);
+
+  const addToCart = (product) => {
+    setCart([...cart, product]);
+  };
+
+  const removeFromCart = (index) => {
+    setCart(cart.filter((_, i) => i !== index));
+  };
+
+  const getTotalPrice = () => {
+    return cart.reduce((total, item) => total + item.price, 0).toFixed(2);
+  };
+
+  return (
+    <div className="p-8">
+      {/* Navigatiebalk */}
+      <nav className="bg-blue-500 p-4 rounded-lg shadow-md mb-6">
+        <ul className="flex justify-center space-x-8">
+          <li><Link href="/" className="text-white font-bold">Home</Link></li>
+          <li><Link href="#products" className="text-white font-bold">Producten</Link></li>
+          <li><Link href="#cart" className="text-white font-bold">Winkelwagen</Link></li>
+          <li><Link href="#contact" className="text-white font-bold">Contact</Link></li>
+          <li><Link href="#about" className="text-white font-bold">Over Ons</Link></li>
+        </ul>
+      </nav>
+
+      <h1 className="text-3xl font-bold mb-6">Armbandelietje - Zelfgemaakte Juwelen</h1>
+
+      {/* Productenlijst */}
+      <div id="products" className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+        {products.map((product) => (
+          <Card key={product.id} className="p-4">
+            <img src={product.image} alt={product.name} className="w-full h-48 object-cover rounded-lg" />
+            <CardContent className="text-center mt-4">
+              <h2 className="text-xl font-semibold">{product.name}</h2>
+              <p className="text-lg text-gray-700">€{product.price}</p>
+              <p className="text-sm text-gray-600">{product.description}</p>
+              <Button className="mt-2 flex items-center gap-2" onClick={() => addToCart(product)}>
+                <ShoppingCart size={16} /> Toevoegen aan winkelwagen
+              </Button>
+            </CardContent>
+          </Card>
+        ))}
+      </div>
+
+      {/* Winkelwagen */}
+      <div id="cart" className="bg-gray-100 p-6 rounded-lg shadow-md">
+        <h2 className="text-2xl font-semibold mb-4">Winkelwagen</h2>
+        {cart.length === 0 ? (
+          <p className="text-gray-500">Je winkelwagen is leeg.</p>
+        ) : (
+          <ul>
+            {cart.map((item, index) => (
+              <li key={index} className="flex justify-between items-center p-2 border-b">
+                <span>{item.name} - €{item.price}</span>
+                <Button variant="outline" size="sm" onClick={() => removeFromCart(index)}>
+                  <Trash size={16} />
+                </Button>
+              </li>
+            ))}
+          </ul>
+        )}
+        <div className="mt-4 text-lg font-bold">Totaal: €{getTotalPrice()}</div>
+        <Button className="mt-4 w-full">Afrekenen</Button>
+      </div>
+
+      {/* Contactpagina */}
+      <div id="contact" className="mt-12 p-6 bg-white shadow-lg rounded-lg">
+        <h2 className="text-2xl font-semibold mb-4">Contact</h2>
+        <p className="text-gray-600">Heb je vragen? Neem gerust contact met ons op via onderstaand formulier.</p>
+        <form className="mt-4">
+          <input type="text" placeholder="Naam" className="w-full p-2 border rounded mb-2" />
+          <input type="email" placeholder="E-mail" className="w-full p-2 border rounded mb-2" />
+          <textarea placeholder="Bericht" className="w-full p-2 border rounded mb-2" rows="4"></textarea>
+          <Button type="submit" className="w-full">Verstuur</Button>
+        </form>
+      </div>
+
+      {/* Over Ons Pagina */}
+      <div id="about" className="mt-12 p-6 bg-white shadow-lg rounded-lg">
+        <h2 className="text-2xl font-semibold mb-4">Over Ons</h2>
+        <p className="text-gray-600">
+          Welkom bij Armbandelietje! Wij maken handgemaakte juwelen met liefde en passie. Elk product wordt zorgvuldig ontworpen en gemaakt met de mooiste kralen en materialen. Of je nu op zoek bent naar een bijzondere armband voor jezelf of een uniek cadeau voor een ander, bij Armbandelietje vind je altijd iets moois.
+        </p>
+        <p className="text-gray-600 mt-4">
+          Onze missie is om mensen te voorzien van betaalbare en stijlvolle juwelen die een persoonlijk tintje aan hun stijl geven. Wij geloven in vakmanschap en de kracht van handgemaakte producten. Elk juweel wordt met zorg gemaakt, zodat jij het met trots kunt dragen.
+        </p>
+      </div>
+    </div>
+  );
+}
+
